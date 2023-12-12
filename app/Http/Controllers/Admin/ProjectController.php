@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -15,7 +16,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderBy('date', 'desc')->paginate(10);
+        $projects = Project::orderBy('id', 'desc')->paginate(10);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -26,7 +27,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::all();
+        return view('admin.projects.create', compact('types'));
     }
 
     /**
@@ -37,7 +39,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // salvo i dati che arrivano dal form
+        $form_data = $request->all();
+
+        // imposto un valore alla data e genero un nuovo slug
+        $form_data['slug'] = Project::generateSlug($form_data['name']);
+        $form_data['date'] = date('Y-m-d');
+
+        // creo una nuova istanza con dentro i dati del form data
+        $project = Project::create($form_data);
+        // dd($project);
+
+        $project->save();
+
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -59,7 +74,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $types = Type::all();
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -72,7 +88,7 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $project->name = $request->name;
-        $project->slug = Project::generateSlug($project->name );
+        $project->slug = Project::generateSlug($project->name);
         $project->description = $request->description;
 
         $project->save();
@@ -91,6 +107,5 @@ class ProjectController extends Controller
         $project->delete();
 
         return redirect()->route('admin.projects.index');
-
     }
 }

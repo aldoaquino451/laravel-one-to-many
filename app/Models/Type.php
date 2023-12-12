@@ -10,16 +10,22 @@ class Type extends Model
 {
     use HasFactory;
 
-    public static function generateSlug($name){
+    public static function generateSlug($name)
+    {
         $slug = Str::slug($name, '-');
         $original_slug = $slug;
-        $exist = Type::where('slug', $slug)->first();
+        $exist = Tecnology::where('slug', $slug)->first();
         $c = 1;
-        while($exist){
-            $slug = $original_slug. '-'. $c;
-            $exist = Type::where('slug', $slug)->first();
+        while ($exist) {
+            $slug = $original_slug . '-' . $c;
+            $exist = Tecnology::where('slug', $slug)->first();
             $c++;
         }
         return $slug;
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }

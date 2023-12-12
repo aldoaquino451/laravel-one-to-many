@@ -14,6 +14,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Data Progetto</th>
+                    <th scope="col">Tipo</th>
                     <th scope="col" style="width: 155px">Azioni</th>
                 </tr>
             </thead>
@@ -23,6 +24,13 @@
                         <th scope="row">{{ $project->id }}</th>
                         <td class=" text-capitalize">{{ $project->name }}</td>
                         <td>{{ Date::formatDate($project->date) }}</td>
+                        <td>
+                            @if ($project->type)
+                                <span class="badge bg-primary">{{ $project->type->name }}</span>
+                            @else
+                                <span>-</span>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-success d-inline-block">
                                 <i class="fa-solid fa-eye"></i>

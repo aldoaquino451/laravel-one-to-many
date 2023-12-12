@@ -1,8 +1,9 @@
 Laravel Boolfolio - Project Typology
 ===
 
-Aggiungiamo una nuova entità **Type**. Questa entità rappresenta la tipologia di progetto ed è in relazione **one to many** con i progetti.
+Aggiungiamo una nuova entità **Type**. Questa entità rappresenta la tipologia di progetto ed è in relazione **one to many** con i progetti.     
 I task da svolgere sono diversi, ma alcuni di essi sono un ripasso di ciò che abbiamo fatto nelle lezioni dei giorni scorsi:
+
 - creare la migration per la tabella `types`
 - creare il model `Type`
 - creare la migration di modifica per la tabella `projects` per aggiungere la chiave esterna
@@ -10,10 +11,13 @@ I task da svolgere sono diversi, ma alcuni di essi sono un ripasso di ciò che a
 - visualizzare nella pagina di dettaglio di un progetto la tipologia associata, se presente
 - permettere all’utente di associare una tipologia nella pagina di creazione e modifica di un progetto
 - gestire il salvataggio dell’associazione progetto-tipologia con opportune regole di validazione
-Bonus 1:
+
+#### Bonus
 creare il seeder per il model Type.
-Bonus 2:
+
+#### Bonus
 aggiungere le operazioni CRUD per il model Type, in modo da gestire le tipologie di progetto direttamente dal pannello di amministrazione.
-Bonus 3:
+
+#### Bonus
 creare una rotta custom che espone tutti i type e per ogni type i progetti iin relazione
 Buon lavoro, buon divertimento e buon w/e!

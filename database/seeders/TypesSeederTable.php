@@ -16,10 +16,10 @@ class TypesSeederTable extends Seeder
      */
     public function run(Faker $faker)
     {
-        for( $i = 0; $i < 20; $i ++ ) {
+        for ($i = 0; $i < 5; $i++) {
             $type = new Type();
 
-            $type->name = $faker->words(3, true);
+            $type->name = $faker->words(1, true);
             $type->slug = Type::generateSlug($type->name);
 
             $type->save();
